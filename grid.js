@@ -53,49 +53,12 @@ var Grid=function(obj,w,h,t){
             tiles[i].style.backgroundImage='url('+p+')';   
         }
     };
-    this.importColors=function(array,width,height,x,y,d){
-        function pos2(x2,y2){
-               return y2*width-width-1+x2;
-        }
-        function isInBounds2(a,b){
-            return (a>0&&b>0&&a<=width&&b<=height);
-        }
-        for(let i=1;i<=w;i++){
-            for(let j=1;j<=h;j++){
-                if(isInBounds2(i+x,j+y)){
-                    this.setColor(i,j,array[pos2(i+x,j+y)]);
-                } else {
-                    this.setColor(i,j,d);
-                }
-            }
-        }
-    };
-    this.importImages=function(array,width,height,x,y,d){
-        function pos2(x2,y2){
-               return y2*width-width-1+x2;
-        }
-        function isInBounds2(a,b){
-            return (a>0&&b>0&&a<=width&&b<=height);
-        }
-        for(let i=1;i<=w;i++){
-            for(let j=1;j<=h;j++){
-                if(isInBounds2(i+x,j+y)){
-                    this.setImage(i,j,array[pos2(i+x,j+y)]);
-                } else {
-                    this.setImage(i,j,d);   
-                }
-            }
-        }
-    };
     this.forEach=function(cal){
         for(let y=1;y<=h;y++){
             for(let x=1;x<=w;x++){
                 cal(x,y);
             }
         }
-    }
-    this.getElement=function(){
-        return obj;   
     };
     this.getTiles=function(){
         return tiles;   
