@@ -1,70 +1,84 @@
-var Grid=function(obj,w,h,t){
-    obj.style.display='grid';
-    obj.style.gridTemplateColumns='repeat(auto-fill,minmax(0px,'+t+'px))';
-    obj.style.width=t*w+'px';
-    var tiles=[];
-    for(let i=0;i<w*h;i++){
-        var e=document.createElement('tile');
-        e.style.width=t+'px';
-        e.style.height=t+'px';
-        e.style.backgroundColor=rColor();
-        e.style.backgroundSize='contain';
-        obj.appendChild(e);
-        tiles.push(e);
+class Tile{
+    constructor(x,y,grid) {
+        this.x = x;
+        this.y = y;
+        this.color = '#222';
+        this.grid = grid;
     }
-    function pos(x,y){
-        return  y*w-w-1+x;
+    draw_box(color=this.color) {
+        let scale = this.grid.scale;
+        let offsetX = this.grid.offsetX;
+        let offsetY = this.grid.offsetY;
+        ctx.beginPath();
+        ctx.strokeStyle = 'white';
+        ctx.fillStyle =  color;
+        ctx.rect(offsetX+this.x*scale,offsetY+this.y*scale,scale,scale);
+        ctx.fill();
+        ctx.stroke();
     }
-    function isInBounds(x,y){
-        return x>0&&y>0&&x<=w&&y<=h;   
+    hasPoint(x,y) {
+        let scale = this.grid.scale;
+        let offsetX = this.grid.offsetX;
+        let offsetY = this.grid.offsetY;
+        return x >= this.x * scale + offsetX &&
+            x < this.x * scale + offsetX + scale &&
+            y >= this.y * scale + offsetY &&
+            y < this.y * scale + offsetY + scale;
     }
-    this.getColor=function(x,y){
-        if(isInBounds(x,y)){
-            return tiles[pos(x,y)].style.backgroundColor;
-        } else return 'out';
-    };
-    this.getImage=function(x,y){
-        if(isInBounds(x,y)){
-            return tiles[pos(x,y)].style.backgroundImage;
-        } else return 'out';
-    };
-    this.setColor=function(x,y,c){
-        if(isInBounds(x,y)){
-            tiles[pos(x,y)].style.backgroundColor=c;
+    getCenter(){
+        let scale = this.grid.scale;
+        let offsetX = this.grid.offsetX;
+        let offsetY = this.grid.offsetY;
+        let x = offsetX + this.x * scale + scale / 2;
+        let y = offsetY + this.y * scale + scale / 2;
+        return {x,y};
+    }
+}
+class Grid{
+    constructor(w,h,scale=40) {
+        this.tiles = [];
+        this.width = w;
+        this.height = h;
+        this.scale = scale;
+        this.offsetX = 0;
+        this.offsetY = 0;
+        for (let x = 0; x < w; x++) {
+            let row = [];
+            for (let y = 0; y < h; y++) {
+                row.push(new Tile(x,y,this));
+            }
+            this.tiles.push(row);
         }
-    };
-    this.getTile=function(x,y){
-        if(isInBounds(x,y)){
-            return tiles[pos(x,y)];
-        } else return 'out';
-    };
-    this.setImage=function(x,y,path){
-        if(isInBounds(x,y)){
-            tiles[pos(x,y)].style.backgroundImage='url('+path+')'; 
+    }
+    inBounds(x,y){
+        return x>=0&&x<this.width&&y>=0&&y<this.height;
+    }
+    getTileAt(x,y){
+        if(this.inBounds(x,y)){
+            return this.tiles[x][y];
         }
-    };
-    this.setColorAll=function(c){
-        for(let i=0;i<tiles.length;i++){
-            tiles[i].style.backgroundColor=c;   
-        }
-    };
-    this.setImageAll=function(p){
-        for(let i=0;i<tiles.length;i++){
-            tiles[i].style.backgroundImage='url('+p+')';   
-        }
-    };
-    this.forEach=function(cal){
-        for(let y=1;y<=h;y++){
-            for(let x=1;x<=w;x++){
-                cal(x,y);
+    }
+    forEach(callback) {
+        for (let row of this.tiles) {
+            for (let tile of row) {
+                let stop = callback(tile);
+                if (stop) return;
             }
         }
-    };
-    this.getTiles=function(){
-        return tiles;   
-    };
-    this.getDimensions=function(){
-        return {w:w,h:h,t:t};
-    };
-    this.getObject=()=>obj;
+    }
+    draw_boxes() {
+        this.forEach(tile => {
+            tile.draw_box();
+        });
+    }
+    getActiveTile(x,y) {
+        let result;
+        this.forEach(tile => {
+            if (tile.hasPoint(x?x:mouse.pos.x,y?y:mouse.pos.y)) {
+                result = tile;
+                return true;
+            }
+        });
+        return result;
+    }
 }

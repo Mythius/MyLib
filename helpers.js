@@ -2,10 +2,17 @@ const obj=id=>document.querySelector(id);
 Node.prototype.on=function(a,b,c){this.addEventListener(a,b,c)};
 const random=(min,max)=>Math.floor(min+Math.random()*(max-min+1));
 const rColor=()=>'rgb('+random(0,255)+','+random(0,255)+','+random(0,255)+')';
-function show(o){o.style.visibility=null;}
+function show(o){o.style.visibility='inherit';}
 function hide(o){o.style.visibility='hidden';}
-const create=id=>document.createElement(id);
-const distance=(x,y,x1,y1)=>Math.round(Math.sqrt((x-x1)**2+(y-y1)**2));
+function create(el,text=''){
+    let e = document.createElement(el);
+    e.innerHTML = text;
+    return e;
+}
+function map(v,n1,n2,m1,m2){
+    return (v-n1)/(n2-n1)*(m2-m1)+m1;
+}
+// const distance=(x,y,x1,y1)=>Math.round(Math.sqrt((x-x1)**2+(y-y1)**2));
 function range(min,max){
     let a=[],i;
     for(i=min;i<max;i++)a.push(i);
