@@ -2,10 +2,10 @@ const EI = require('electron-winstaller');
 
 try{
 	EI.createWindowsInstaller({
-		appDirectory: './bananagrams-win32-x64',
-		outputDirectory: 'bananagrams-installer',
-		authors: 'Matthias Southwick',
-		exe: 'bananagrams.exe'
+		appDirectory: `./${process.argv.slice(-1)[0]}-win32-x64`,
+		outputDirectory: `${process.argv.slice(-1)[0]}-installer`,
+		authors: `Matthias Southwick`,
+		exe: `${process.argv.slice(-1)[0]}.exe`
 	}).then(e=>{
 		console.log('Success');
 	}).catch(e=>{
