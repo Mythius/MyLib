@@ -10,7 +10,7 @@ function createWindow () {
     // icon: __dirname + '/site/favicon.ico'
   })
 
-  win.loadFile('index.html')
+  win.loadFile('site/index.html')
 
   win.setMenu(null);
 }
