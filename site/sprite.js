@@ -145,12 +145,12 @@ class Animation{
 		}
 	}
 	play(name,is_loop=false){
-		if(this.name == name) return new Promise().reject();
+		if(this.name == name) return new Promise(r=>r(0));
 		if(this.playing){
 			this.stop();
 		}
 		const THIS = this;
-		if(this.playing && this.name == name) return new Promise().reject();
+		if(this.playing && this.name == name) return new Promise(r=>r(0));
 		this.isLoop = is_loop;
 		this.playing = true;
 		this.current_frame = 1;
@@ -164,17 +164,13 @@ class Animation{
 			this.last_time = new Date().getTime();
 			this.#prom = new Promise(resolve=>{
 				THIS.end=c=>{
-					if(c==1){
-						if(this.sprite) resolve(this.sprite);
-					} else {
-						reject();
-					}
+					resolve(c);
 				}
 			});
 			return this.#prom;
 		} else {
 			console.warn('Not a valid Animation: '+name);
-			return new Promise().reject();
+			return new Promise(r=>r(0));
 		}
 	}
 	stop(){
@@ -344,7 +340,6 @@ class Sprite extends Hitbox{
 		return new Promise(resolve=>{
 			Animation.xml(animation_path,data=>{
 				this.animation = new Animation(this.element,data);
-				this.animation.sprite = this;
 				resolve();
 			});
 		});
