@@ -10,8 +10,8 @@ function createWindow () {
     height: 400,
     webPreferences: {
       nodeIntegration: true
-    }
-    // icon: __dirname + '/site/favicon.ico'
+    },
+    icon: __dirname + '/site/icon.png'
   })
 
   win.loadFile('site/index.html')
@@ -20,3 +20,16 @@ function createWindow () {
 }
 
 app.on('ready', createWindow)
+
+/*
+
+  package.json
+
+  "build":{
+    "win": {
+      "icon": "site/icon.png"
+    }
+  }
+
+
+*/
