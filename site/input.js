@@ -33,6 +33,7 @@ class mouse{
             }
         }
         function mousedown(e) {
+            if(e.target != element) return;
             mousemove(e);
             if(e.which == 1){
                 mouse.down = true;
