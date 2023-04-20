@@ -1,5 +1,6 @@
 // add to package.json
 // "start": ".\\node_modules\\electron\\dist\\electron.exe ."
+// electron-builder -p --win
 
 const { app, BrowserWindow } = require('electron');
 
