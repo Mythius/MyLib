@@ -1,3 +1,6 @@
+// add to package.json
+// "start": ".\\node_modules\\electron\\dist\\electron.exe ."
+
 const { app, BrowserWindow } = require('electron');
 
 const name = "";
