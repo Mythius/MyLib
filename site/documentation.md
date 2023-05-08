@@ -1,5 +1,6 @@
 This code defines several classes and functions related to vector operations, line segments, and animations.
 
+## Vector Class
 The `Vector` class represents a 2D vector and has the following methods:
 - `distance(x1, y1, x2, y2)`: returns the distance between two points with coordinates `(x1, y1)` and `(x2, y2)`.
 - `getDir(x, y)`: returns the direction in degrees of a vector with components `x` and `y`.
@@ -10,6 +11,7 @@ The `Vector` class represents a 2D vector and has the following methods:
 - `add(x, y)`: returns a new `Vector` instance with components translated by `x` and `y`.
 - `clone()`: returns a new `Vector` instance with the same components.
 
+## Line Class
 The `Line` class represents a line segment and has the following methods:
 - `constructor(px1, py1, px2, py2)`: creates a new `Line` instance with endpoints `(px1, py1)` and `(px2, py2)`.
 - `setPos(px1, py1, px2, py2)`: updates the endpoints of the line segment.
@@ -18,6 +20,8 @@ The `Line` class represents a line segment and has the following methods:
 - `touches(line)`: returns the intersection point of this line segment and another line segment `line`, or `undefined` if they do not intersect.
 - `draw(color)`: draws the line segment on a 2D canvas context with the specified `color`.
 
+
+## Animation Class
 The `Animation` class represents an animated sequence of images and has the following methods:
 - `xml(path, fn)`: sends an XMLHttpRequest to retrieve data from the specified `path` and calls `fn` with the response text when it is received.
 - `constructor(element, data)`: creates a new `Animation` instance for the HTML `img` element with ID `element` using image data in the JSON format `data`.
@@ -26,7 +30,6 @@ The `Animation` class represents an animated sequence of images and has the foll
 - `play(name, is_loop)`: starts playing the animation sequence with the specified `name` and looping behavior `is_loop`, and returns a promise that resolves when the animation finishes.
 - `stop()`: stops the animation and calls the `end` function.
 
-This code defines two classes, `Hitbox` and `Sprite`, in JavaScript.
 
 ## Hitbox Class
 The `Hitbox` class defines a hitbox object used for collision detection. The constructor creates an instance with a position, width, and height. The `update()` method is called every time the object is moved or resized, updating the hitbox's lines and angles. The `DRAW()` method draws the hitbox lines onto a 2D canvas. The `touches(hitbox)` method returns `true` if this hitbox object touches the given `hitbox` object.
