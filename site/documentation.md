@@ -32,9 +32,36 @@ The `Animation` class represents an animated sequence of images and has the foll
 
 
 ## Hitbox Class
-The `Hitbox` class defines a hitbox object used for collision detection. The constructor creates an instance with a position, width, and height. The `update()` method is called every time the object is moved or resized, updating the hitbox's lines and angles. The `DRAW()` method draws the hitbox lines onto a 2D canvas. The `touches(hitbox)` method returns `true` if this hitbox object touches the given `hitbox` object.
+The `Hitbox` class is used to define a hitbox in a 2D space, which is a rectangular area used for collision detection. This class has the following properties and methods:
 
-The `Hitbox` class has several setter methods that allow the position, width, height, scale, and offset to be changed. Setting these properties calls the `update()` method.
+### Properties
+
+- `pos`: an object representing the position of the center of the hitbox, with `x` and `y` properties indicating the coordinates.
+- `w`: a number representing the width of the hitbox.
+- `h`: a number representing the height of the hitbox.
+- `lines`: an array of four `Line` objects that represent the four sides of the hitbox.
+- `angles`: an array of four angles in radians representing the angles of the corners of the hitbox.
+- `scale`: an object representing the scale of the hitbox, with `x` and `y` properties indicating the scale factors.
+- `offset`: an object representing the offset of the hitbox, with `x` and `y` properties indicating the offset values from the center of the hitbox.
+- `dir`: a number representing the direction of the hitbox in radians.
+
+### Methods
+
+- `constructor(pos, w, h)`: creates a new `Hitbox` object with the given position, width, and height. Initializes the `lines`, `angles`, `scale`, `offset`, and `dir` properties, and calls the `update` method.
+- `update()`: updates the `angles` and `lines` properties of the hitbox based on its `pos`, `w`, `h`, `scale`, `offset`, and `dir` properties.
+- `DRAW(color)`: draws the hitbox on a canvas with the given color. Draws a small dot at the center of the hitbox, and the four `Line` objects in the `lines` array.
+- `touches(hitbox)`: checks if the hitbox collides with another hitbox. Takes another `Hitbox` object as argument and returns `true` if they touch, otherwise returns `false`.
+- `set direction(d)`: sets the direction of the hitbox in radians and calls the `update` method. Returns the new direction value.
+- `set position(v)`: sets the position of the hitbox to the given vector `v` and calls the `update` method. Returns the new position vector.
+- `set width(w)`: sets the width of the hitbox to the given value `w` and calls the `update` method. Returns the new width value.
+- `set height(h)`: sets the height of the hitbox to the given value `h` and calls the `update` method. Returns the new height value.
+- `set setScale(v)`: sets the `scale` property of the hitbox to the given vector `v` and calls the `update` method. Returns the new `scale` vector.
+- `set setOffset(v)`: sets the `offset` property of the hitbox to the given vector `v` and calls the `update` method. Returns the new `offset` vector.
+
+### Static properties
+
+- `show`: a boolean indicating whether to show the hitbox or not. Used in the `DRAW` method to determine whether to draw the hitbox or not.
+
 
 ## Sprite Class
 The `Sprite` class is a subclass of `Hitbox`. It extends `Hitbox` by adding the ability to load and display an image on the canvas. It also adds methods for animations, movement, and attacking.
