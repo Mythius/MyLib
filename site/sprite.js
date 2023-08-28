@@ -245,6 +245,12 @@ class Hitbox{
 					}
 				}
 			}
+		} else if(hitbox instanceof Line){
+			for(let l1 of this.lines){
+				if(l1.touches(hitbox)){
+					return true;
+				}
+			}
 		}
 		return false;
 	}
@@ -288,7 +294,7 @@ class Sprite extends Hitbox{
 	#slide_x = 0;
 	#slide_y = 0;
 	#end_slide;
-	constructor(image_path){
+	constructor(image_path,ready_callback=()=>{}){
 		var once = false;
 		super(new Vector(-100,-100),1,1);
 		const THIS = this;
@@ -298,11 +304,13 @@ class Sprite extends Hitbox{
 		this.transformX = 1;
 		this.sliding = false;
 		this.visible = true;
+		this.alpha = -1;
 		this.element.onload = function(){
 			if(once) return;
 			once = true;
 			THIS.width = THIS.element.width;
 			THIS.height = THIS.element.height;
+			ready_callback();
 		}
 		this.move = data => {};
 	}
@@ -323,17 +331,22 @@ class Sprite extends Hitbox{
 		} else {
 			this.move(this.pos.clone());
 		}
-		if(this.attack && typeof this.attack == 'function'){
-			this.attack();
-		}
 		let pos = this.pos;
 		let drawPos = this.lines[2].getPosA();
+		let ga;
+		if(this.alpha != -1){
+			ga = ctx.globalAlpha;
+			ctx.globalAlpha = this.alpha;
+		}
 		ctx.save();
 		ctx.translate(pos.x,pos.y);
 		ctx.rotate(Vector.rad(this.dir));
 		ctx.scale(this.transformX,1);
 		ctx.drawImage(this.element,-this.w/2,-this.h/2);
 		ctx.restore();
+		if(this.alpha != -1){
+			ctx.globalAlpha = ga;
+		}
 		if(Hitbox.show) this.DRAW();
 	}
 	addAnimation(animation_path){
@@ -346,9 +359,6 @@ class Sprite extends Hitbox{
 	}
 	addMovement(callback){
 		this.move = callback;
-	}
-	attack(callback){
-		this.attack = callback;
 	}
 	slideTo(x,y,segs=8){
 		return new Promise(resolve=>{
@@ -365,7 +375,7 @@ class Sprite extends Hitbox{
 	}
 	distanceTo(sprite){
 		if(sprite instanceof Sprite){
-			let d = distance(this.pos.x,this.pos.y,sprite.pos.x,sprite.pos.y);
+			let d = Vector.distance(this.pos.x,this.pos.y,sprite.pos.x,sprite.pos.y);
 			return d;
 		}
 	}
