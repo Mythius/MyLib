@@ -37,8 +37,8 @@ app.use(express.static(path + "site/"));
 let password;
 file.read('password.txt',data=>{password=data});
 app.post('/api/publish',async (req,res)=>{
-  console.log('Recieved Publish',password,req.headers.authorization);
-  if(password != req.headers.authorization){
+  if(password.trim() != req.headers.authorization.trim()){
+    console.log('Invalid Password for Publish');
     res.json({message:'Inavlid Password'});
     return;
   }
