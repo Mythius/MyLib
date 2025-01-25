@@ -34,7 +34,7 @@ function getPageIndex(siteData, name = "") {
 async function getPageHTML(url) {
   let siteData = await readConfigFile();
   if(JSON.stringify(siteData) == '{}') return '<h1>No Config</h1>';
-  let pageIx = getPageIndex(siteData, url);
+  let pageIx = getPageIndex(siteData, decodeURI(url));
   const template = `
         <!DOCTYPE html>
         <html lang="en">
