@@ -26,7 +26,8 @@ class client {
   }
 }
 
-const port = 80;
+let last_cli_arg = Number(process.argv.at(-1));
+const port = isNaN(last_cli_arg) ? 80 : last_cli_arg;
 const path = __dirname + "/";
 
 app.use(bodyParser.json({ limit: '50mb' }));
