@@ -1,1 +1,0 @@
-Files in this folder are synchronized to Google Drive!

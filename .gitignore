@@ -1,3 +1,5 @@
 node_modules/*
 package-lock.json
 dist/*
+password.txt
+site/assets/*
