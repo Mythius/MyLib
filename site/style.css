@@ -110,6 +110,7 @@ footer {
 
 footer > div{
     flex: 25%;
+    padding: 25px;
 }
 
 .line{
