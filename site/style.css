@@ -1,0 +1,152 @@
+body {
+  margin: 0;
+}
+
+nav {
+  height: 117px;
+  /* background-color: lightblue; */
+  /* border-bottom: 1px solid black; */
+  display: flex !important;
+  align-items: center;
+  justify-items: center;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+#logo {
+  max-height: 100%;
+  max-width: 40%;
+}
+
+#spacer {
+  flex: 1;
+}
+
+nav > a {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #333;
+  width: 100px;
+  font-family: system-ui;
+  max-width: 20%;
+  text-align: center;
+  font-size: 16px;
+}
+
+.carousel-inner img {
+  width: 100%; /* Full width */
+  height: 600px !important; /* Set the height you want */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+.section {
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+  margin-top: 50px;
+  padding-top: 50px;
+  border-top: 1px solid darkgrey;
+  margin-bottom: 20px;
+}
+
+.section img {
+  width: 100%;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.section h3 {
+  font-family: system-ui;
+}
+
+.section p {
+  color: #8b8b8b;
+  font-weight: bold;
+}
+
+footer {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  min-height: 500px;
+  display: flex !important;
+  color: white;
+  font-family: system-ui;
+  margin-top: 100px;
+  padding: 100px;
+}
+
+
+@media screen and (orientation:portrait) {
+    footer{
+        flex-direction: column;
+        padding: 30px;
+        gap: 50px;
+    }
+    nav{
+        flex-direction: column;
+    }
+    nav > a{
+        margin-bottom: 10px;
+        font-size: 20px;
+        text-align: left;
+    }
+    #logo{
+        max-width: 90%;
+        margin: auto;
+    }
+    nav{
+        height: auto;
+        align-items: flex-start;
+    }
+ }
+
+footer > div{
+    flex: 25%;
+}
+
+.line{
+    width: 75px;
+    border: 1px solid white;
+    margin-bottom: 15px;
+}
+
+.icotext{
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.icotext img{
+    width: 30px;
+    margin-right: 10px;
+}
+
+.footerlink{
+    border-bottom: 1px solid gray;
+    width: 80%;
+    padding: 5px;
+    color: white !important;
+    text-decoration: none !important;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.footerlink:hover{
+    background-color: gray;
+}
+
+img,iframe{
+    border-radius: 15px;
+}
+
+#carousel1 > a{
+    background: none !important;
+}
