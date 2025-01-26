@@ -56,7 +56,7 @@ async function getPageHTML(url) {
                 ${getNavTitlesAndLinks(siteData)}
             </nav>
             <main>
-            ${getAllComponents(siteData.pages[pageIx].components)}</main>
+            ${getAllComponents(siteData.pages[pageIx]?.components)}</main>
             <div></div>
             <footer>
             ${generateFooterComponents(siteData.footer)}
@@ -76,6 +76,7 @@ function getNavTitlesAndLinks(siteData) {
 }
 
 function getAllComponents(components){
+    if(!components) return;
     let result = '';
     for(let c of components){
         if(c.type == 'carousel') result += generateCarouselComponent(c);
