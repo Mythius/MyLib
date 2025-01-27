@@ -63,6 +63,10 @@ nav > a {
   box-sizing: border-box;
 }
 
+.section > * {
+  width: 100%;
+}
+
 .section h3 {
   font-family: system-ui;
 }
