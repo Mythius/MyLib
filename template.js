@@ -35,7 +35,7 @@ async function getPageHTML(url) {
   let siteData = await readConfigFile();
   if(JSON.stringify(siteData) == '{}') return '<h1>No Config</h1>';
   let pageIx = getPageIndex(siteData, decodeURI(url));
-  const template = `
+  const template = /*html*/`
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -71,7 +71,7 @@ function getNavTitlesAndLinks(siteData) {
   let data = siteData.pages.map((e) => {
     return { title: e.title, url: e.url ? e.url : `/${e.title.toLowerCase()}`, type:e.type };
   });
-  let HTML = data.map(e=>`<a ${e.type=='link'?'target="_blank"':""} href="${e.url}">${e.title}</a>`)
+  let HTML = data.map(e=> /*html*/`<a ${e.type=='link'?'target="_blank"':""} href="${e.url}">${e.title}</a>`)
   return HTML.join('');
 }
 
@@ -91,18 +91,18 @@ function generateCarouselComponent(carousel_component) {
     let d = 0;
     function generateSlide(url){
         c++;
-        return `
+        return  /*html*/`
         <div class="item ${c==1?'active':''}">
             <img src="assets/${url}" alt="${url.split('.')[0]}" style="width:100%;">
         </div>`;
     }    
     function generateDot(){
-        return `
+        return  /*html*/`
         <li data-target="#carousel1" data-slide-to="${d++}" ${d==1?'class="active"':''}></li>
         `;
     }
     let title = carousel_component.text?`<h2>${carousel_component.text}</h2>`:'';
-    return `
+    return  /*html*/`
     <div class="container">
     ${title}  
     <div id="carousel1" class="carousel slide" data-ride="carousel">
@@ -126,12 +126,13 @@ function generateCarouselComponent(carousel_component) {
         <span class="sr-only">Next</span>
         </a>
     </div>
-    </div>`;
+    </div>
+    `;
 }
 
 function generateEmbeded(data){
     let title = data.title ? `<h3>${data.title}</h3>` : '';
-    return `
+    return  /*html*/`
         <div class="container">
             <div class="section">
                 ${title}
@@ -144,7 +145,7 @@ function generateEmbeded(data){
 
 function generateImageTextComponent(data) {
     let img = data.image ? `<img src="assets/${data.image}">` : '';
-    return `
+    return  /*html*/`
         <div class="container">
             <div class="section">
                 <h3>${data.header}</h3>
@@ -168,7 +169,7 @@ function generateFooterComponents(footer){
         return result;
     }
     function generateFlexBox(data){
-        return `
+        return  /*html*/`
         <div class="footer-section">
             <h4>${data.title}</h4>
             <div class="line"></div>
@@ -180,7 +181,7 @@ function generateFooterComponents(footer){
 }
 
 function genFooterLink(d){
-    return `
+    return  /*html*/`
         <a class="footerlink" target="_blank" href="${d.url}">
         ${d.title}
         </a>
@@ -188,7 +189,7 @@ function genFooterLink(d){
 }
 
 function generateFooterContact(d){
-    return `
+    return  /*html*/`
         <div class="icotext">
         <img src="contact.png">
         <div>
@@ -200,7 +201,7 @@ function generateFooterContact(d){
 }
 
 function generateFooterWebsite(d){
-    return `
+    return  /*html*/`
         <div class="icotext">
         <img src="website.png">
         <div>
@@ -212,7 +213,7 @@ function generateFooterWebsite(d){
 }
 
 function generateFooterAddress(d){
-    return `
+    return  /*html*/`
         <div class="icotext">
         <img src="address.png">
         <div>
