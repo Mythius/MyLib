@@ -9,5 +9,5 @@ class StaticFileHandler(http.server.SimpleHTTPRequestHandler):
         super().__init__(*args, directory=DIRECTORY, **kwargs)
 
 with socketserver.TCPServer(("", PORT), StaticFileHandler) as httpd:
-    print(f"Serving static files from '{DIRECTORY}' at port {PORT}")
+    print(f"Serving static files from '{DIRECTORY}' -> http://localhost:{PORT}")
     httpd.serve_forever()
