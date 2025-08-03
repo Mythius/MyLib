@@ -1,5 +1,32 @@
 // ctx must be defined.
 // Vector Must be defined {x:Number,y:Number}
+/*
+
+const canvas = obj('canvas');
+const ctx = canvas.getContext('2d');
+
+Gamepad.addCanvas(canvas);
+new Gamepad.Joystick(60); // 60 pixels in radius
+new Gamepad.Button(25, new Vector(canvas.width - 70, canvas.height - 30));
+new Gamepad.Button(25, new Vector(canvas.width - 30, canvas.height - 70));
+new Gamepad.Button(25, new Vector(canvas.width - 110, canvas.height - 70));
+new Gamepad.Button(25, new Vector(canvas.width - 70, canvas.height - 110));
+// new Gamepad.dPad(20, new Vector(canvas.width / 2, canvas.height / 2), 2);
+Touch.init(data => {
+	Gamepad.touchController(data, action => {
+		obj('p').innerHTML = JSON.stringify(action);
+	});
+}, { zoom: false });
+
+function loop() {
+	setTimeout(loop, 1000 / 30);
+	ctx.clearRect(-2, -2, canvas.width + 2, canvas.height + 2);
+	Gamepad.draw();
+}
+
+loop();
+
+*/
 (function (glob) {
   var Gamepad = {};
   glob.Gamepad = Gamepad;
@@ -77,7 +104,7 @@
         type == "circle" ? Gamepad.button.circle : Gamepad.Button.pentagon;
       this.id = id ? id : `button${button_id++}`;
       this.size = size;
-	  this.isOwnParent = true;
+      this.isOwnParent = true;
       Gamepad.elements.push(this);
     }
     draw(translate = true, vis = this.isOwnParent) {
@@ -104,7 +131,7 @@
         `dPad${dpad_id++}-up`
       );
       this.up.path = Gamepad.button.pentagon;
-	  this.up.isOwnParent = false;
+      this.up.isOwnParent = false;
       this.down = new Gamepad.Button(
         size,
         pos,
@@ -112,7 +139,7 @@
         `dPad${dpad_id++}-down`
       );
       this.down.path = Gamepad.button.pentagon;
-	  this.down.isOwnParent = false;
+      this.down.isOwnParent = false;
       this.left = new Gamepad.Button(
         size,
         pos,
@@ -120,7 +147,7 @@
         `dPad${dpad_id++}-left`
       );
       this.left.path = Gamepad.button.pentagon;
-	  this.left.isOwnParent = false;
+      this.left.isOwnParent = false;
       this.right = new Gamepad.Button(
         size,
         pos,
@@ -128,7 +155,7 @@
         `dPad${dpad_id++}-right`
       );
       this.right.path = Gamepad.button.pentagon;
-	  this.right.isOwnParent = false;
+      this.right.isOwnParent = false;
       Gamepad.elements.push(this);
     }
     draw(vis = true) {
