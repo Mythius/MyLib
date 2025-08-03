@@ -69,7 +69,7 @@ class keys{
 class Touch{
     static touches = [];
     static resolved = [];
-    static init(callback){
+    static init(callback,options={zoom:true}){
 
         function fixid(id){
             return Math.abs(id%10);
@@ -83,8 +83,9 @@ class Touch{
         });
 
         document.on('touchmove',e=>{
-            if(Touch.touches.filter(e=>e).length == 1){
+            if(Touch.touches.filter(e=>e).length == 1 && !options.zoom){
                 for(let touch of e.changedTouches){
+                    touch.isNotFirst = 1;
                     let last_pos = Touch.touches[fixid(touch.identifier)];
                     callback({
                         type: 'scroll',
@@ -92,6 +93,7 @@ class Touch{
                         y: touch.clientY,
                         dx: touch.clientX - last_pos.clientX,
                         dy: touch.clientY - last_pos.clientY,
+                        isFirst: !last_pos.isNotFirst,
                         target: last_pos.target
                     });
                     touch.action='scroll';
