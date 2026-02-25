@@ -31,10 +31,18 @@ function getPageIndex(siteData, name = "") {
   return 0;
 }
 
+function safeDecodeURI(str) {
+  try {
+    return decodeURI(str);
+  } catch {
+    return str;
+  }
+}
+
 async function getPageHTML(url) {
   let siteData = await readConfigFile();
   if(JSON.stringify(siteData) == '{}') return '<h1>No Config</h1>';
-  let pageIx = getPageIndex(siteData, decodeURI(url));
+  let pageIx = getPageIndex(siteData, safeDecodeURI(url));
   const template = /*html*/`
         <!DOCTYPE html>
         <html lang="en">
@@ -137,7 +145,7 @@ function generateEmbeded(data){
             <div class="section">
                 ${title}
                 <br>
-                ${decodeURI(data.text)}
+                ${safeDecodeURI(data.text)}
             </div>
         </div>
     `
