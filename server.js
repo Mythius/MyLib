@@ -32,7 +32,7 @@ const path = __dirname + "/";
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-app.use(express.static(path + "site/"));
+
 
 let password;
 file.read('password.txt',data=>{password=data});
@@ -58,6 +58,7 @@ async function syncAssetFolder(folderId){
   await prom;
 }
 
+app.use(express.static(path + "site/"));
 app.get(/.*/, function (request, response) {
   // response.sendFile(path+'site/');
   generateHTML(request,response);
