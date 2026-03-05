@@ -1,3 +1,17 @@
+/*
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.min.js"
+></script>
+
+<script src="https://cdn.jsdelivr.net/gh/IDMNYU/p5.js-speech@0.0.3/lib/p5.speech.js"></script>
+*/
+
 (function (global) {
   const Voice = {};
   let speech = new p5.Speech();

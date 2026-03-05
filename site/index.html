@@ -5,34 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="icon" type="image/x-icon" href="icon.png" />
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.min.js"
-      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.min.js"
-    ></script>
-
-    <script src="https://cdn.jsdelivr.net/gh/IDMNYU/p5.js-speech@0.0.3/lib/p5.speech.js"></script>
-    <script src="voice.js"></script>
+    <!-- <script src="voice.js"></script> -->
     <script src="helpers.js"></script>
   </head>
   <body>
     <button>Check</button>
     <p></p>
+    <script src="music.js"></script>
     <script>
       async function handleResult(text) {
         document.querySelector("p").innerHTML += text + "<br>";
         // Voice.speak(text);
       }
 
-      Voice.startListening(handleResult, false);
+      // Voice.startListening(handleResult, false);
 
-      // document.on("click", (e) => {
-      //   Voice.speak(prompt("enter text")).then((e) => alert("done"));
-      // });
+      document.on("click", async (e) => {
+        let LakeShoreDrive = await Music.loadSong("46MX86XQqYCZRvwPpeq4Gi");
+        LakeShoreDrive.play();
+      });
     </script>
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+    <div id="embed-iframe"></div>
   </body>
 </html>

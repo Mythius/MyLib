@@ -1,31 +1,34 @@
 /*
 
-    LOAD SONG
-    let LakeShoreDrive = await Music.loadSong("46MX86XQqYCZRvwPpeq4Gi");
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+<div id="embed-iframe"></div>
 
-    SONG CONTROLS
-    LakeShoreDrive.play();
-    LakeShoreDrive.pause();
-    LakeShoreDrive.resume();
-    LakeShoreDrive.restart();
-    LakeShoreDrive.destroy();
-    LakeShoreDrive.seek(10); // Skip to 10 Seconds.
 
-    PLAYLIST 
-    await Music.loadPlayList('7phO9PAhj7bU6TwcHPrr7s');
-    await Music.playNext():
+LOAD SONG
+let LakeShoreDrive = await Music.loadSong("46MX86XQqYCZRvwPpeq4Gi");
 
-    SONG META DATA
-    await Music.getSongData() // Gets Song data of current Song
-    Example Return Value: 
-    {
-        name: 'Lake Shore Drive', 
-        artist: 'Aliotta Haynes Jeremiah', 
-        thumbnail: 'https://i.scdn.co/image/ab67616d0000b273bfd869b5a775481785ce55ad'
-    }
+SONG CONTROLS
+LakeShoreDrive.play();
+LakeShoreDrive.pause();
+LakeShoreDrive.resume();
+LakeShoreDrive.restart();
+LakeShoreDrive.destroy();
+LakeShoreDrive.seek(10); // Skip to 10 Seconds.
+
+PLAYLIST 
+await Music.loadPlayList('7phO9PAhj7bU6TwcHPrr7s');
+await Music.playNext():
+
+SONG META DATA
+await Music.getSongData() // Gets Song data of current Song
+Example Return Value: 
+{
+    name: 'Lake Shore Drive', 
+    artist: 'Aliotta Haynes Jeremiah', 
+    thumbnail: 'https://i.scdn.co/image/ab67616d0000b273bfd869b5a775481785ce55ad'
+}
 
 */
-
 
 (async function (global) {
   let Music = {};
@@ -104,13 +107,13 @@
     return fetch(
       `https://api.spotify.com/v1/tracks/${song_id.replace(
         "spotify:track:",
-        ""
+        "",
       )}`,
       {
         headers: {
           Authorization: `Bearer ${Music.spotifyToken}`,
         },
-      }
+      },
     )
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch song data");
@@ -119,7 +122,7 @@
       .then((data) => ({
         name: data.name,
         artist: data.artists.map((a) => a.name).join(", "),
-        thumbnail: data.album.images[0]?.url
+        thumbnail: data.album.images[0]?.url,
       }));
   };
 })(this);
