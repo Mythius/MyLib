@@ -152,7 +152,6 @@ footer > div {
 img,
 iframe {
   border-radius: 15px;
-  transform: translateY(25px);
 }
 
 #carousel1 > a {
