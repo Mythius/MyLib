@@ -35,9 +35,11 @@ nav > a {
 }
 
 .carousel-inner img {
-  width: 100%; /* Full width */
-  object-fit: cover; /* Ensures the image covers the area without distortion */
   max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 .container {
@@ -159,4 +161,5 @@ iframe {
 
 .carousel-inner > .item {
   height: 600px !important;
+  display: flex;
 }
