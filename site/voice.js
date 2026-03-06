@@ -32,7 +32,13 @@
     speech.speak(text);
   }
 
-  async function speak(text) {
+  async function getVoices() {
+    let req = await fetch("https://kokoro.msouthwick.com/v1/audio/voices");
+    let data = await req.json();
+    return data.voices;
+  }
+
+  async function speak(text, voice = "jm_kumo") {
     return new Promise(async (res, rej) => {
       const response = await fetch(
         "https://kokoro.msouthwick.com/v1/audio/speech",
@@ -45,7 +51,7 @@
           body: JSON.stringify({
             model: "kokoro",
             input: text,
-            voice: "am_adam",
+            voice: voice,
             response_format: "mp3",
             download_format: "mp3",
             speed: 1,
@@ -88,6 +94,7 @@
   Voice.stopListening = stopListening;
   Voice.speak = speak;
   Voice.lamespeak = lamespeak;
+  Voice.getVoices = getVoices;
 
   global.Voice = Voice;
 })(this);

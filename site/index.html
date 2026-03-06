@@ -5,24 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="icon" type="image/x-icon" href="icon.png" />
-    <!-- <script src="voice.js"></script> -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.min.js"
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/IDMNYU/p5.js-speech@0.0.3/lib/p5.speech.js"></script>
+    <script src="voice.js"></script>
     <script src="helpers.js"></script>
   </head>
   <body>
     <button>Check</button>
+    <select name="" id="voices"></select>
+    <button id="listen-button">Listen to My Voice</button>
     <p></p>
-    <script src="music.js"></script>
+    <!-- <script src="music.js"></script> -->
     <script>
       async function handleResult(text) {
         document.querySelector("p").innerHTML += text + "<br>";
         // Voice.speak(text);
       }
 
+      Voice.getVoices().then((voices) => {
+        let select = document.querySelector("#voices");
+        voices.forEach((voice) => {
+          let option = document.createElement("option");
+          option.innerHTML = voice;
+          option.value = voice;
+          select.appendChild(option);
+        });
+      });
+
+      obj("#listen-button").on("click", () => {
+        Voice.startListening(handleResult, false);
+      });
+
       // Voice.startListening(handleResult, false);
 
-      document.on("click", async (e) => {
-        let LakeShoreDrive = await Music.loadSong("46MX86XQqYCZRvwPpeq4Gi");
-        LakeShoreDrive.play();
+      document.querySelector('button').on("click", async (e) => {
+        // let LakeShoreDrive = await Music.loadSong("46MX86XQqYCZRvwPpeq4Gi");
+        // LakeShoreDrive.play();
+        Voice.speak(prompt("Enter Text to speak"), document.querySelector("#voices").value)
       });
     </script>
     <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
